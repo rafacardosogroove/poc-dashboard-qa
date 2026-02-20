@@ -19,3 +19,8 @@ Funcionalidade: Retirada de equipamento
     Dado que escolho Cartão
     Então a compra é processada
 
+@modulo_equipamentos_old
+ Cenário: Pagamento via Cartão de Crédito 5
+    Dado que escolho Cartão
+    Então a compra é processada
+
