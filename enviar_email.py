@@ -8,7 +8,7 @@ from datetime import datetime
 def enviar_relatorio():
     email_remetente = os.environ.get('EMAIL_USER')
     senha_remetente = os.environ.get('EMAIL_PASS')
-    email_destinatario = "rcardoso1904@gmail.com"
+    email_destinatario = "rcardoso1904@gmail.com,edson.oliveira@groove.tech"
     
     try:
         with open('README.md', 'r', encoding='utf-8') as f:
