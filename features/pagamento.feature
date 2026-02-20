@@ -13,3 +13,8 @@ Funcionalidade: Teste de Pagamento
     Cenário: Pagamento via Cartão de Crédito
     Dado que escolho Cartão
     Então a compra é processada
+
+ Cenário: Pagamento via Cartão de Crédito 4
+    Dado que escolho Cartão
+    Então a compra é processada
+
