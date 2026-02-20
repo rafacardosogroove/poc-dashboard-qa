@@ -1,5 +1,5 @@
 @modulo_pagamento
-Funcionalidade: Teste de Pagamento
+Funcionalidade: Retirada de equipamento
   
   Cenário: Pagamento via Pix aprovado
     Dado que escolho Pix
