@@ -1,10 +1,12 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 20:32
+> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 20:51
 
 ## 🏆 Top QAs (Ranking de Commits)
 | QA | Total de Pushes (Commits) |
 |:---|:---:|
-| 👨‍💻 **Rafael Cardoso** | 1 |
+| 👨‍💻 **Rafael Cardoso** | 22 |
+| 👨‍💻 **Robô da Qualidade (QA Bot)** | 18 |
+| 👨‍💻 **rafacardosogroove** | 3 |
 
 ## 🚀 Status da Automação
 | Categoria | Total |
@@ -60,7 +62,11 @@
 ## 📜 Histórico Recente de Commits
 | Data | Autor | Mensagem |
 |:---|:---|:---|
+| 20/02 17:50 | **Rafael Cardoso** | Disparo de email dashboard |
+| 20/02 20:32 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático de cenários BDD |
 | 20/02 17:31 | **Rafael Cardoso** | Safona identica para visualizar testes |
+| 20/02 20:28 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático de cenários BDD |
+| 20/02 17:20 | **Rafael Cardoso** | Contabilizando arquivos tests |
 
 ## 🏷️ Cobertura de Tags
 | Tag | Usos |
