@@ -14,6 +14,7 @@ Funcionalidade: Teste de Pagamento
     Dado que escolho Cartão
     Então a compra é processada
 
+@modulo_equipamentos
  Cenário: Pagamento via Cartão de Crédito 4
     Dado que escolho Cartão
     Então a compra é processada
