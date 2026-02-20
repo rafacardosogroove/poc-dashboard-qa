@@ -1,7 +1,17 @@
-## 📊 Dashboard de Cobertura BDD (Gerado Automaticamente)
+# 📊 Dashboard Executivo de Qualidade (BDD)
 
-**🔹 Total de Funcionalidades (Features):** 1
-**🔹 Total de Cenários Mapeados:** 4
+*(Relatório gerado e atualizado automaticamente)*
 
-### 📂 Cobertura por Módulo:
-- `@modulo_pagamento`: 4 cenário(s)
+## 🎯 Resumo Global
+- **Total de Funcionalidades (Features):** 1
+- **Total de Cenários de Teste:** 4
+
+---
+## 📂 Cenários por Funcionalidade
+- **Teste de Pagamento**: 4 cenário(s)
+
+---
+## 🏷️ Mapeamento de Tags
+| Tag | Quantidade de Usos |
+|---|---|
+| `@modulo_pagamento` | 1 |
