@@ -1,42 +1,63 @@
 import os
-from collections import Counter
+from collections import Counter, defaultdict
 
 def gerar_metricas_bdd(diretorio='features'):
     total_features = 0
     total_cenarios = 0
-    modulos_contador = Counter()
+    tags_contador = Counter()
+    cenarios_por_feature = defaultdict(int)
 
-    # Percorre todas as pastas procurando arquivos .feature
     for root, _, files in os.walk(diretorio):
         for file in files:
             if file.endswith('.feature'):
-                total_features += 1
                 with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
-                    tag_atual = "@modulo_nao_identificado"
+                    feature_atual = "Feature Desconhecida"
+                    tem_feature = False
                     
                     for linha in f:
                         linha_limpa = linha.strip()
                         
-                        # Captura a tag que indica o módulo (ex: @modulo_pagamento)
-                        if linha_limpa.startswith('@modulo_'):
-                            tag_atual = linha_limpa.split()[0]
+                        # 1. Captura todas as tags da linha (palavras que começam com @)
+                        palavras = linha_limpa.split()
+                        for palavra in palavras:
+                            if palavra.startswith('@'):
+                                tags_contador[palavra] += 1
+                                
+                        # 2. Identifica o nome da Funcionalidade
+                        if linha_limpa.startswith(('Funcionalidade:', 'Feature:')):
+                            feature_atual = linha_limpa.split(':', 1)[1].strip()
+                            if not tem_feature:
+                                total_features += 1
+                                tem_feature = True
                             
-                        # Conta os cenários e associa ao último módulo encontrado
+                        # 3. Conta os cenários e vincula à funcionalidade atual
                         if linha_limpa.startswith(('Cenário:', 'Cenario:', 'Esquema do Cenário:', 'Scenario:')):
                             total_cenarios += 1
-                            modulos_contador[tag_atual] += 1
+                            cenarios_por_feature[feature_atual] += 1
 
-    return total_features, total_cenarios, modulos_contador
+    return total_features, total_cenarios, cenarios_por_feature, tags_contador
 
 if __name__ == '__main__':
-    # 1. Roda a contagem
-    features, cenarios, modulos = gerar_metricas_bdd()
+    features, cenarios, cenarios_por_feature, tags_contador = gerar_metricas_bdd()
     
-    # 2. Imprime o resultado no formato Markdown (Pronto para o GitHub/Gestão)
-    print("## 📊 Dashboard de Cobertura BDD (Gerado Automaticamente)\n")
-    print(f"**🔹 Total de Funcionalidades (Features):** {features}")
-    print(f"**🔹 Total de Cenários Mapeados:** {cenarios}\n")
-    print("### 📂 Cobertura por Módulo:")
+    # Gerando o Markdown com cara de Dashboard Profissional
+    print("# 📊 Dashboard Executivo de Qualidade (BDD)\n")
+    print("*(Relatório gerado e atualizado automaticamente)*\n")
     
-    for modulo, qtd in modulos.most_common():
-        print(f"- `{modulo}`: {qtd} cenário(s)")
+    print("## 🎯 Resumo Global")
+    print(f"- **Total de Funcionalidades (Features):** {features}")
+    print(f"- **Total de Cenários de Teste:** {cenarios}\n")
+    
+    print("---")
+    print("## 📂 Cenários por Funcionalidade")
+    for feature, qtd in cenarios_por_feature.items():
+        print(f"- **{feature}**: {qtd} cenário(s)")
+        
+    print("\n---")
+    print("## 🏷️ Mapeamento de Tags")
+    print("| Tag | Quantidade de Usos |")
+    print("|---|---|")
+    
+    # Mostra as tags da mais usada para a menos usada
+    for tag, qtd in tags_contador.most_common():
+        print(f"| `{tag}` | {qtd} |")
