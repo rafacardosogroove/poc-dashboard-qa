@@ -19,12 +19,11 @@ def get_git_commits(limit=5):
         return ["Sem histórico de commits disponível"]
 
 def get_top_contributors():
-    # Conta quantos commits cada QA fez no repositório inteiro
     try:
         output = subprocess.check_output(["git", "log", "--format=%an"]).decode(errors='ignore').strip()
         autores = output.split('\n')
         ranking = Counter(autores)
-        return ranking.most_common(5) # Pega os 5 que mais trabalham
+        return ranking.most_common(5)
     except:
         return []
 
@@ -42,7 +41,6 @@ def gerar_metricas_bdd(diretorio='features'):
     total_features, total_cenarios = 0, 0
     tags_contador = Counter()
     dados_features = []
-
     if os.path.exists(diretorio):
         for root, _, files in os.walk(diretorio):
             for file in files:
@@ -51,7 +49,6 @@ def gerar_metricas_bdd(diretorio='features'):
                     data_m = datetime.fromtimestamp(os.path.getmtime(caminho)).strftime('%d/%m/%Y')
                     total_features += 1
                     cenarios_f, nome_f = 0, "Sem nome"
-                    
                     with open(caminho, 'r', encoding='utf-8') as f:
                         for linha in f:
                             l = linha.strip()
@@ -68,10 +65,7 @@ def gerar_metricas_bdd(diretorio='features'):
 if __name__ == '__main__':
     features, cenarios, lista_features, tags = gerar_metricas_bdd()
     pages_encontradas = detalhar_arquivos('pages', '.py')
-    
-    # Lendo a pasta de testes de volta! (Ajuste o nome 'tests' se a sua pasta se chamar diferente)
     testes_encontrados = detalhar_arquivos('tests', '.py') 
-    
     commits = get_git_commits()
     autor = get_last_committer()
     top_qas = get_top_contributors()
@@ -79,9 +73,7 @@ if __name__ == '__main__':
     print("# 📊 Dashboard de Engenharia de Qualidade - SolAgora")
     print(f"> 👤 **Último Push:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
     
-    # NOVO: Seção de Top Contribuidores (Produtividade)
     print("## 🏆 Top QAs (Ranking de Commits)")
-    print("Os profissionais que mais contribuíram para a automação do projeto:")
     print("| QA | Total de Pushes (Commits) |")
     print("|:---|:---:|")
     for qa, qtd in top_qas:
@@ -92,7 +84,7 @@ if __name__ == '__main__':
     print(f"| :--- | :---: |")
     print(f"| 📝 Cenários BDD | {cenarios} |")
     print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
-    print(f"| 🧪 Scripts de Teste | {len(testes_encontrados)} |") # AQUI ESTÃO OS TESTES!
+    print(f"| 🧪 Scripts de Teste | {len(testes_encontrados)} |")
     
     print("\n### 📂 Page Objects Criados")
     if pages_encontradas:
