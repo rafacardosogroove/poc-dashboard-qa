@@ -72,10 +72,17 @@ if __name__ == '__main__':
     print(f"| 📝 Cenários BDD | {cenarios} |")
     print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
     
-    print("\n### 📂 Page Objects Criados")
-    # Exibe as pages em formato de tags de código para ficar bonito
-    pages_str = "  •  ".join([f"`{p}`" for p in pages_encontradas])
-    print(pages_str if pages_str else "*Nenhuma page encontrada*")
+  print("\n### 📂 Page Objects Criados")
+    if pages_encontradas:
+        print("<details>")
+        print(f"<summary><b>Clique para ver a lista de {len(pages_encontradas)} pages</b></summary>\n")
+        print("<ul>")
+        for p in pages_encontradas:
+            print(f"<li><code>{p}</code></li>")
+        print("</ul>")
+        print("</details>")
+    else:
+        print("*Nenhuma page encontrada*")
 
     print("\n---")
     print("## 📂 Detalhamento de Negócio (Features)")
