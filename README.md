@@ -1,11 +1,11 @@
 # 📊 Dashboard de Engenharia de Qualidade - GrooveTech
-> 👤 **Último Push por:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 16:31
+> 👤 **Último Push por:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 16:40
 
 ## 🚀 Status da Automação
 | Categoria | Quantidade |
 | :--- | :---: |
 | 📝 Cenários BDD | 9 |
-| 📄 Page Objects | 0 |
+| 📄 Page Objects | 22 |
 | 🧪 Scripts de Teste | 0 |
 
 ## 📂 Detalhamento de Negócio (Features)
