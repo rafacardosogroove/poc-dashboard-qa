@@ -1,5 +1,5 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Piloto:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 19:30
+> 👤 **Último Piloto:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 19:52
 
 ## 🚀 Status da Automação
 | Categoria | Total |
@@ -8,7 +8,31 @@
 | 📄 Page Objects | 19 |
 
 ### 📂 Page Objects Criados
-`Analise_processamento_page`  •  `Verificacao_notas_fiscais_page`  •  `analise_credito_page`  •  `conferir_documentacao`  •  `documentacao_completa_page`  •  `documentacao_e_comprovantes_page`  •  `documentacao_pj`  •  `documentacao_popup_page`  •  `login_page`  •  `modal_conta_energia_page`  •  `modal_notas_fiscais_page`  •  `modal_pagamento_page`  •  `notas_fiscais_page`  •  `opcoes_parcelamento_page`  •  `pagamento_processo_iniciado_page`  •  `politica_renda_page`  •  `resultado_simulacao_page`  •  `simulador_page`  •  `validacao_valoresv_page`
+<details>
+<summary><b>Clique para ver a lista de 19 pages</b></summary>
+
+<ul>
+<li><code>Analise_processamento_page</code></li>
+<li><code>Verificacao_notas_fiscais_page</code></li>
+<li><code>analise_credito_page</code></li>
+<li><code>conferir_documentacao</code></li>
+<li><code>documentacao_completa_page</code></li>
+<li><code>documentacao_e_comprovantes_page</code></li>
+<li><code>documentacao_pj</code></li>
+<li><code>documentacao_popup_page</code></li>
+<li><code>login_page</code></li>
+<li><code>modal_conta_energia_page</code></li>
+<li><code>modal_notas_fiscais_page</code></li>
+<li><code>modal_pagamento_page</code></li>
+<li><code>notas_fiscais_page</code></li>
+<li><code>opcoes_parcelamento_page</code></li>
+<li><code>pagamento_processo_iniciado_page</code></li>
+<li><code>politica_renda_page</code></li>
+<li><code>resultado_simulacao_page</code></li>
+<li><code>simulador_page</code></li>
+<li><code>validacao_valoresv_page</code></li>
+</ul>
+</details>
 
 ---
 ## 📂 Detalhamento de Negócio (Features)
@@ -21,7 +45,7 @@
 ## 📜 Histórico Recente de Commits
 | Data | Autor | Mensagem |
 |:---|:---|:---|
-| 20/02 16:30 | **Rafael Cardoso** | Full Transparecny V4 |
+| 20/02 16:48 | **Rafael Cardoso** | 🐛 Corrigindo a identação e ativando a sanfona |
 
 ## 🏷️ Cobertura de Tags
 | Tag | Usos |
