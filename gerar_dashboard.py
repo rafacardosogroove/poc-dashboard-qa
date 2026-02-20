@@ -72,7 +72,7 @@ if __name__ == '__main__':
     print(f"| 📝 Cenários BDD | {cenarios} |")
     print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
     
-  print("\n### 📂 Page Objects Criados")
+    print("\n### 📂 Page Objects Criados")
     if pages_encontradas:
         print("<details>")
         print(f"<summary><b>Clique para ver a lista de {len(pages_encontradas)} pages</b></summary>\n")
