@@ -5,19 +5,28 @@ from datetime import datetime
 
 def get_last_committer():
     try:
-        return subprocess.check_output(["git", "log", "-1", "--format=%an"]).decode().strip()
+        return subprocess.check_output(["git", "log", "-1", "--format=%an"]).decode(errors='ignore').strip()
     except:
         return "Robô de QA"
 
 def get_git_commits(limit=5):
     try:
-        # Pega os últimos commits: Data | Autor | Mensagem
         output = subprocess.check_output(
             ["git", "log", f"-{limit}", "--format=%ad | %an | %s", "--date=format:%d/%m %H:%M"]
-        ).decode().strip()
+        ).decode(errors='ignore').strip()
         return output.split('\n')
     except:
         return ["Sem histórico de commits disponível"]
+
+def get_top_contributors():
+    # Conta quantos commits cada QA fez no repositório inteiro
+    try:
+        output = subprocess.check_output(["git", "log", "--format=%an"]).decode(errors='ignore').strip()
+        autores = output.split('\n')
+        ranking = Counter(autores)
+        return ranking.most_common(5) # Pega os 5 que mais trabalham
+    except:
+        return []
 
 def detalhar_arquivos(diretorio, extensao):
     lista_arquivos = []
@@ -25,7 +34,6 @@ def detalhar_arquivos(diretorio, extensao):
         for root, _, files in os.walk(diretorio):
             for file in files:
                 if file.lower().endswith(extensao) and "__init__.py" not in file.lower():
-                    # Remove a extensão para ficar mais bonito na lista
                     nome_limpo = file.replace(extensao, "")
                     lista_arquivos.append(nome_limpo)
     return sorted(lista_arquivos)
@@ -60,17 +68,31 @@ def gerar_metricas_bdd(diretorio='features'):
 if __name__ == '__main__':
     features, cenarios, lista_features, tags = gerar_metricas_bdd()
     pages_encontradas = detalhar_arquivos('pages', '.py')
+    
+    # Lendo a pasta de testes de volta! (Ajuste o nome 'tests' se a sua pasta se chamar diferente)
+    testes_encontrados = detalhar_arquivos('tests', '.py') 
+    
     commits = get_git_commits()
     autor = get_last_committer()
+    top_qas = get_top_contributors()
     
     print("# 📊 Dashboard de Engenharia de Qualidade - SolAgora")
-    print(f"> 👤 **Último Piloto:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
+    print(f"> 👤 **Último Push:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
     
-    print("## 🚀 Status da Automação")
+    # NOVO: Seção de Top Contribuidores (Produtividade)
+    print("## 🏆 Top QAs (Ranking de Commits)")
+    print("Os profissionais que mais contribuíram para a automação do projeto:")
+    print("| QA | Total de Pushes (Commits) |")
+    print("|:---|:---:|")
+    for qa, qtd in top_qas:
+        print(f"| 👨‍💻 **{qa}** | {qtd} |")
+    
+    print("\n## 🚀 Status da Automação")
     print(f"| Categoria | Total |")
     print(f"| :--- | :---: |")
     print(f"| 📝 Cenários BDD | {cenarios} |")
     print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
+    print(f"| 🧪 Scripts de Teste | {len(testes_encontrados)} |") # AQUI ESTÃO OS TESTES!
     
     print("\n### 📂 Page Objects Criados")
     if pages_encontradas:
