@@ -5,24 +5,33 @@ from datetime import datetime
 
 def get_last_committer():
     try:
-        # Comando para pegar o nome do último autor no Git
         return subprocess.check_output(["git", "log", "-1", "--format=%an"]).decode().strip()
     except:
         return "Robô de QA"
 
-defdef contar_arquivos(diretorio, extensao):
-    contador = 0
+def get_git_commits(limit=5):
+    try:
+        # Pega os últimos commits: Data | Autor | Mensagem
+        output = subprocess.check_output(
+            ["git", "log", f"-{limit}", "--format=%ad | %an | %s", "--date=format:%d/%m %H:%M"]
+        ).decode().strip()
+        return output.split('\n')
+    except:
+        return ["Sem histórico de commits disponível"]
+
+def detalhar_arquivos(diretorio, extensao):
+    lista_arquivos = []
     if os.path.exists(diretorio):
-        for root, dirs, files in os.walk(diretorio):
+        for root, _, files in os.walk(diretorio):
             for file in files:
-                # O segredo está aqui: adicionamos o 'and' para ignorar o __init__
                 if file.lower().endswith(extensao) and "__init__.py" not in file.lower():
-                    contador += 1
-    return contador
+                    # Remove a extensão para ficar mais bonito na lista
+                    nome_limpo = file.replace(extensao, "")
+                    lista_arquivos.append(nome_limpo)
+    return sorted(lista_arquivos)
 
 def gerar_metricas_bdd(diretorio='features'):
-    total_features = 0
-    total_cenarios = 0
+    total_features, total_cenarios = 0, 0
     tags_contador = Counter()
     dados_features = []
 
@@ -30,55 +39,59 @@ def gerar_metricas_bdd(diretorio='features'):
         for root, _, files in os.walk(diretorio):
             for file in files:
                 if file.endswith('.feature'):
-                    caminho_arquivo = os.path.join(root, file)
-                    timestamp = os.path.getmtime(caminho_arquivo)
-                    data_modificacao = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
-                    
+                    caminho = os.path.join(root, file)
+                    data_m = datetime.fromtimestamp(os.path.getmtime(caminho)).strftime('%d/%m/%Y')
                     total_features += 1
-                    cenarios_desta_feature = 0
-                    nome_feature = "Sem nome"
+                    cenarios_f, nome_f = 0, "Sem nome"
                     
-                    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+                    with open(caminho, 'r', encoding='utf-8') as f:
                         for linha in f:
-                            linha_limpa = linha.strip()
-                            palavras = linha_limpa.split()
-                            for p in palavras:
+                            l = linha.strip()
+                            for p in l.split():
                                 if p.startswith('@'): tags_contador[p] += 1
-                            if linha_limpa.startswith(('Funcionalidade:', 'Feature:')):
-                                nome_feature = linha_limpa.split(':', 1)[1].strip()
-                            if linha_limpa.startswith(('Cenário:', 'Cenario:', 'Scenario:')):
+                            if l.startswith(('Funcionalidade:', 'Feature:')):
+                                nome_f = l.split(':', 1)[1].strip()
+                            if l.startswith(('Cenário:', 'Cenario:', 'Scenario:')):
                                 total_cenarios += 1
-                                cenarios_desta_feature += 1
-                    
-                    dados_features.append({'nome': nome_feature, 'qtd': cenarios_desta_feature, 'data': data_modificacao})
-
+                                cenarios_f += 1
+                    dados_features.append({'nome': nome_f, 'qtd': cenarios_f, 'data': data_m})
     return total_features, total_cenarios, dados_features, tags_contador
 
 if __name__ == '__main__':
-    # Coleta dados de Negócio (BDD)
     features, cenarios, lista_features, tags = gerar_metricas_bdd()
-    
-    # Coleta dados Técnicos (Automação) - Ajuste os nomes das pastas se precisar!
-    total_pages = contar_arquivos('pages', '.py')
-    total_tests = contar_arquivos('tests', '.py')
+    pages_encontradas = detalhar_arquivos('pages', '.py')
+    commits = get_git_commits()
     autor = get_last_committer()
     
-    print("# 📊 Dashboard de Engenharia de Qualidade - GrooveTech")
-    print(f"> 👤 **Último Push por:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
+    print("# 📊 Dashboard de Engenharia de Qualidade - SolAgora")
+    print(f"> 👤 **Último Piloto:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
     
     print("## 🚀 Status da Automação")
-    print(f"| Categoria | Quantidade |")
+    print(f"| Categoria | Total |")
     print(f"| :--- | :---: |")
     print(f"| 📝 Cenários BDD | {cenarios} |")
-    print(f"| 📄 Page Objects | {total_pages} |")
-    print(f"| 🧪 Scripts de Teste | {total_tests} |")
+    print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
     
-    print("\n## 📂 Detalhamento de Negócio (Features)")
+    print("\n### 📂 Page Objects Criados")
+    # Exibe as pages em formato de tags de código para ficar bonito
+    pages_str = "  •  ".join([f"`{p}`" for p in pages_encontradas])
+    print(pages_str if pages_str else "*Nenhuma page encontrada*")
+
+    print("\n---")
+    print("## 📂 Detalhamento de Negócio (Features)")
     print("| Feature | Cenários | Modificação |")
     print("|:---|:---:|:---:|")
     for f in lista_features:
         print(f"| {f['nome']} | {f['qtd']} | {f['data']} |")
         
+    print("\n## 📜 Histórico Recente de Commits")
+    print("| Data | Autor | Mensagem |")
+    print("|:---|:---|:---|")
+    for c in commits:
+        cols = c.split(" | ")
+        if len(cols) == 3:
+            print(f"| {cols[0]} | **{cols[1]}** | {cols[2]} |")
+
     print("\n## 🏷️ Cobertura de Tags")
     print("| Tag | Usos |")
     print("|---|---|")
