@@ -1,21 +1,21 @@
-# 📊 Dashboard Executivo de Qualidade (BDD)
+# 📊 Dashboard de Engenharia de Qualidade
+> 👤 **Último Push por:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 16:21
 
-> 🕒 *Última atualização do dashboard: 20/02/2026 16:11*
+## 🚀 Status da Automação
+| Categoria | Quantidade |
+| :--- | :---: |
+| 📝 Cenários BDD | 8 |
+| 📄 Page Objects | 0 |
+| 🧪 Scripts de Teste | 0 |
 
-## 🎯 Resumo Global
-- **Total de Funcionalidades:** 2
-- **Total de Cenários de Teste:** 8
-
----
-## 📂 Detalhamento por Funcionalidade
-| Feature | Cenários | Última Modificação |
+## 📂 Detalhamento de Negócio (Features)
+| Feature | Cenários | Modificação |
 |:---|:---:|:---:|
-| **Retirada de equipamento** | 4 | 20/02/2026 |
-| **Teste de Pagamento** | 4 | 20/02/2026 |
+| Retirada de equipamento | 4 | 20/02/2026 |
+| Teste de Pagamento | 4 | 20/02/2026 |
 
----
-## 🏷️ Mapeamento de Tags
-| Tag | Quantidade de Usos |
+## 🏷️ Cobertura de Tags
+| Tag | Usos |
 |---|---|
 | `@modulo_equipamentos` | 2 |
 | `@modulo_equipamento` | 2 |
