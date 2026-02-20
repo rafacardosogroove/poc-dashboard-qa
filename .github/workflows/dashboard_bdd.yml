@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Permite rodar manualmente pelo botão no GitHub
+  workflow_dispatch:
 
 jobs:
   build-dashboard:
@@ -16,7 +16,7 @@ jobs:
       - name: 📥 Checkout do Repositório
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Importante para o ranking de commits funcionar 100%
+          fetch-depth: 0
 
       - name: 🐍 Configurar Python
         uses: actions/setup-python@v4
@@ -32,6 +32,9 @@ jobs:
           git config --global user.email "qa-bot@solagora.com.br"
           git add README.md
           git diff --quiet && git diff --staged --quiet || (git commit -m "docs: 📊 Atualiza dashboard automático" && git push)
+
+      - name: 📦 Instalar Dependências de E-mail
+        run: pip install markdown
 
       - name: 📧 Enviar Relatório por E-mail
         env:
