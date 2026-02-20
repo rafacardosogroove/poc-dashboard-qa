@@ -1,63 +1,73 @@
 import os
 from collections import Counter, defaultdict
+from datetime import datetime
 
 def gerar_metricas_bdd(diretorio='features'):
     total_features = 0
     total_cenarios = 0
     tags_contador = Counter()
-    cenarios_por_feature = defaultdict(int)
+    dados_features = [] # Lista para guardar nome, quantidade e data
 
     for root, _, files in os.walk(diretorio):
         for file in files:
             if file.endswith('.feature'):
-                with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
-                    feature_atual = "Feature Desconhecida"
-                    tem_feature = False
-                    
+                caminho_arquivo = os.path.join(root, file)
+                
+                # Captura a data da última modificação do arquivo
+                timestamp = os.path.getmtime(caminho_arquivo)
+                data_modificacao = datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y')
+                
+                total_features += 1
+                cenarios_desta_feature = 0
+                nome_feature = "Feature sem nome"
+                
+                with open(caminho_arquivo, 'r', encoding='utf-8') as f:
                     for linha in f:
                         linha_limpa = linha.strip()
                         
-                        # 1. Captura todas as tags da linha (palavras que começam com @)
+                        # Captura Tags
                         palavras = linha_limpa.split()
                         for palavra in palavras:
                             if palavra.startswith('@'):
                                 tags_contador[palavra] += 1
                                 
-                        # 2. Identifica o nome da Funcionalidade
+                        # Captura Nome da Feature
                         if linha_limpa.startswith(('Funcionalidade:', 'Feature:')):
-                            feature_atual = linha_limpa.split(':', 1)[1].strip()
-                            if not tem_feature:
-                                total_features += 1
-                                tem_feature = True
+                            nome_feature = linha_limpa.split(':', 1)[1].strip()
                             
-                        # 3. Conta os cenários e vincula à funcionalidade atual
+                        # Conta Cenários
                         if linha_limpa.startswith(('Cenário:', 'Cenario:', 'Esquema do Cenário:', 'Scenario:')):
                             total_cenarios += 1
-                            cenarios_por_feature[feature_atual] += 1
+                            cenarios_desta_feature += 1
+                
+                dados_features.append({
+                    'nome': nome_feature,
+                    'qtd': cenarios_desta_feature,
+                    'data': data_modificacao
+                })
 
-    return total_features, total_cenarios, cenarios_por_feature, tags_contador
+    return total_features, total_cenarios, dados_features, tags_contador
 
 if __name__ == '__main__':
-    features, cenarios, cenarios_por_feature, tags_contador = gerar_metricas_bdd()
+    features, cenarios, lista_features, tags_contador = gerar_metricas_bdd()
     
-    # Gerando o Markdown com cara de Dashboard Profissional
     print("# 📊 Dashboard Executivo de Qualidade (BDD)\n")
-    print("*(Relatório gerado e atualizado automaticamente)*\n")
+    print(f"> 🕒 *Última atualização do dashboard: {datetime.now().strftime('%d/%m/%Y %H:%M')}*\n")
     
     print("## 🎯 Resumo Global")
-    print(f"- **Total de Funcionalidades (Features):** {features}")
+    print(f"- **Total de Funcionalidades:** {features}")
     print(f"- **Total de Cenários de Teste:** {cenarios}\n")
     
     print("---")
-    print("## 📂 Cenários por Funcionalidade")
-    for feature, qtd in cenarios_por_feature.items():
-        print(f"- **{feature}**: {qtd} cenário(s)")
+    print("## 📂 Detalhamento por Funcionalidade")
+    print("| Feature | Cenários | Última Modificação |")
+    print("|:---|:---:|:---:|")
+    for f in lista_features:
+        print(f"| **{f['nome']}** | {f['qtd']} | {f['data']} |")
         
     print("\n---")
     print("## 🏷️ Mapeamento de Tags")
     print("| Tag | Quantidade de Usos |")
     print("|---|---|")
-    
-    # Mostra as tags da mais usada para a menos usada
     for tag, qtd in tags_contador.most_common():
         print(f"| `{tag}` | {qtd} |")
