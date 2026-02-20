@@ -1,17 +1,17 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 21:01
+> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 21:14
 
 ## 🏆 Top QAs (Ranking de Commits)
 | QA | Total de Pushes (Commits) |
 |:---|:---:|
-| 👨‍💻 **Rafael Cardoso** | 23 |
-| 👨‍💻 **Robô da Qualidade (QA Bot)** | 19 |
+| 👨‍💻 **Rafael Cardoso** | 24 |
+| 👨‍💻 **Robô da Qualidade (QA Bot)** | 20 |
 | 👨‍💻 **rafacardosogroove** | 3 |
 
 ## 🚀 Status da Automação
 | Categoria | Total |
 | :--- | :---: |
-| 📝 Cenários BDD | 14 |
+| 📝 Cenários BDD | 19 |
 | 📄 Page Objects | 19 |
 | 🧪 Scripts de Teste | 1 |
 
@@ -56,22 +56,23 @@
 | Feature | Cenários | Modificação |
 |:---|:---:|:---:|
 | Retirada de equipamento | 5 | 20/02/2026 |
+| Teste Gustavo | 5 | 20/02/2026 |
 | Retirada de equipamento | 5 | 20/02/2026 |
 | Teste de Pagamento | 4 | 20/02/2026 |
 
 ## 📜 Histórico Recente de Commits
 | Data | Autor | Mensagem |
 |:---|:---|:---|
+| 20/02 18:14 | **Rafael Cardoso** | Disparo de email 2 usuarios |
+| 20/02 21:01 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
 | 20/02 18:00 | **Rafael Cardoso** | Disparo de email formatado |
 | 20/02 20:51 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
 | 20/02 17:50 | **Rafael Cardoso** | Disparo de email dashboard |
-| 20/02 20:32 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático de cenários BDD |
-| 20/02 17:31 | **Rafael Cardoso** | Safona identica para visualizar testes |
 
 ## 🏷️ Cobertura de Tags
 | Tag | Usos |
 |---|---|
-| `@modulo_equipamentos` | 3 |
-| `@modulo_pagamento` | 2 |
-| `@modulo_equipamentos_old` | 2 |
+| `@modulo_equipamentos` | 4 |
+| `@modulo_pagamento` | 3 |
+| `@modulo_equipamentos_old` | 3 |
 | `@modulo_equipamento` | 2 |
