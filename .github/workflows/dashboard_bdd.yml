@@ -27,13 +27,13 @@ jobs:
 
       - name: 📊 Rodar o Script e Gerar Markdown
         # Executa aquele seu script e salva o texto final neste novo arquivo
-        run: python gerar_dashboard.py > DASHBOARD_BDD.md
+       run: python gerar_dashboard.py > README.md
 
       - name: 💾 Fazer o Commit Automático
         run: |
           git config --global user.name "Robô da Qualidade (QA Bot)"
           git config --global user.email "qa-bot@groovetech.com"
-          git add DASHBOARD_BDD.md
+          git add README.md
           
           # Essa linha verifica se os números mudaram. Se mudaram, ele salva e avisa!
           git diff --quiet && git diff --staged --quiet || (git commit -m "docs: 📊 Atualiza dashboard automático de cenários BDD" && git push)
