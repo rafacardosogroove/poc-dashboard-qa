@@ -1,5 +1,5 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 20:15
+> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 20:28
 
 ## 🏆 Top QAs (Ranking de Commits)
 | QA | Total de Pushes (Commits) |
@@ -11,7 +11,7 @@
 | :--- | :---: |
 | 📝 Cenários BDD | 14 |
 | 📄 Page Objects | 19 |
-| 🧪 Scripts de Teste | 0 |
+| 🧪 Scripts de Teste | 1 |
 
 ### 📂 Page Objects Criados
 <details>
@@ -51,7 +51,7 @@
 ## 📜 Histórico Recente de Commits
 | Data | Autor | Mensagem |
 |:---|:---|:---|
-| 20/02 17:14 | **Rafael Cardoso** | Ajustes identação controle ranking QA |
+| 20/02 17:20 | **Rafael Cardoso** | Contabilizando arquivos tests |
 
 ## 🏷️ Cobertura de Tags
 | Tag | Usos |
