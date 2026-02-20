@@ -62,7 +62,7 @@ if __name__ == '__main__':
     total_tests = contar_arquivos('tests', '.py')
     autor = get_last_committer()
     
-    print("# 📊 Dashboard de Engenharia de Qualidade")
+    print("# 📊 Dashboard de Engenharia de Qualidade - GrooveTech")
     print(f"> 👤 **Último Push por:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
     
     print("## 🚀 Status da Automação")
