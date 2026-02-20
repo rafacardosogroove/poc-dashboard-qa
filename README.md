@@ -1,5 +1,5 @@
-# 📊 Dashboard de Engenharia de Qualidade
-> 👤 **Último Push por:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 16:21
+# 📊 Dashboard de Engenharia de Qualidade - GrooveTech
+> 👤 **Último Push por:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 16:28
 
 ## 🚀 Status da Automação
 | Categoria | Quantidade |
