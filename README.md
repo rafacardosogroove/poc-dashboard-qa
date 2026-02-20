@@ -15,3 +15,4 @@
 | Tag | Quantidade de Usos |
 |---|---|
 | `@modulo_pagamento` | 1 |
+| `@modulo_equipamentos` | 1 |
