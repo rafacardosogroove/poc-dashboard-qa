@@ -27,7 +27,7 @@ jobs:
 
       - name: 📊 Rodar o Script e Gerar Markdown
         # Executa aquele seu script e salva o texto final neste novo arquivo
-       run: python gerar_dashboard.py > README.md
+        run: python gerar_dashboard.py > README.md
 
       - name: 💾 Fazer o Commit Automático
         run: |
