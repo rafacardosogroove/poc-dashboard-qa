@@ -86,6 +86,7 @@ if __name__ == '__main__':
     print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
     print(f"| 🧪 Scripts de Teste | {len(testes_encontrados)} |")
     
+    # Seção de Page Objects (Sanfona)
     print("\n### 📂 Page Objects Criados")
     if pages_encontradas:
         print("<details>")
@@ -95,8 +96,19 @@ if __name__ == '__main__':
             print(f"<li><code>{p}</code></li>")
         print("</ul>")
         print("</details>")
+
+    # NOVA Seção de Scripts de Teste (Sanfona Identica)
+    print("\n### 🧪 Scripts de Teste Automatizados")
+    if testes_encontrados:
+        print("<details>")
+        print(f"<summary><b>Clique para ver os {len(testes_encontrados)} scripts de teste</b></summary>\n")
+        print("<ul>")
+        for t in testes_encontrados:
+            print(f"<li><code>{t}</code></li>")
+        print("</ul>")
+        print("</details>")
     else:
-        print("*Nenhuma page encontrada*")
+        print("*Nenhum script de teste encontrado na pasta /tests*")
 
     print("\n---")
     print("## 📂 Detalhamento de Negócio (Features)")
