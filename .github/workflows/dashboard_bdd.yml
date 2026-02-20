@@ -1,0 +1,39 @@
+name: Gerar Dashboard de Qualidade (BDD)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'features/**/*.feature' # O robô só trabalha se alguém alterar os BDDs!
+  schedule:
+    - cron: '0 8 * * 1-5' # Roda sozinho de segunda a sexta às 8h da manhã
+  workflow_dispatch: # Cria um botão no GitHub para você rodar quando quiser
+
+jobs:
+  build-dashboard:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Dá permissão para o robô salvar o arquivo no repositório
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v3
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 📊 Rodar o Script e Gerar Markdown
+        # Executa aquele seu script e salva o texto final neste novo arquivo
+        run: python gerar_dashboard.py > DASHBOARD_BDD.md
+
+      - name: 💾 Fazer o Commit Automático
+        run: |
+          git config --global user.name "Robô da Qualidade (QA Bot)"
+          git config --global user.email "qa-bot@groovetech.com"
+          git add DASHBOARD_BDD.md
+          
+          # Essa linha verifica se os números mudaram. Se mudaram, ele salva e avisa!
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: 📊 Atualiza dashboard automático de cenários BDD" && git push)
