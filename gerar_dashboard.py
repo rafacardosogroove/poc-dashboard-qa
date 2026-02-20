@@ -10,12 +10,13 @@ def get_last_committer():
     except:
         return "Robô de QA"
 
-def contar_arquivos(diretorio, extensao):
+defdef contar_arquivos(diretorio, extensao):
     contador = 0
     if os.path.exists(diretorio):
-        for root, _, files in os.walk(diretorio):
+        for root, dirs, files in os.walk(diretorio):
             for file in files:
-                if file.endswith(extensao):
+                # O segredo está aqui: adicionamos o 'and' para ignorar o __init__
+                if file.lower().endswith(extensao) and "__init__.py" not in file.lower():
                     contador += 1
     return contador
 
