@@ -1,17 +1,17 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 20/02/2026 21:14
+> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 21/02/2026 05:03
 
 ## 🏆 Top QAs (Ranking de Commits)
 | QA | Total de Pushes (Commits) |
 |:---|:---:|
-| 👨‍💻 **Rafael Cardoso** | 24 |
-| 👨‍💻 **Robô da Qualidade (QA Bot)** | 20 |
+| 👨‍💻 **Rafael Cardoso** | 25 |
+| 👨‍💻 **Robô da Qualidade (QA Bot)** | 21 |
 | 👨‍💻 **rafacardosogroove** | 3 |
 
 ## 🚀 Status da Automação
 | Categoria | Total |
 | :--- | :---: |
-| 📝 Cenários BDD | 19 |
+| 📝 Cenários BDD | 11 |
 | 📄 Page Objects | 19 |
 | 🧪 Scripts de Teste | 1 |
 
@@ -55,24 +55,44 @@
 ## 📂 Detalhamento de Negócio (Features)
 | Feature | Cenários | Modificação |
 |:---|:---:|:---:|
-| Retirada de equipamento | 5 | 20/02/2026 |
-| Teste Gustavo | 5 | 20/02/2026 |
-| Retirada de equipamento | 5 | 20/02/2026 |
-| Teste de Pagamento | 4 | 20/02/2026 |
+| Monitoramento e Conclusão do Projeto | 2 | 21/02/2026 |
+| Simulação de Financiamento | 2 | 21/02/2026 |
+| Envio de Notas Fiscais | 2 | 21/02/2026 |
+| Solicitação de Análise de Crédito | 3 | 21/02/2026 |
+| Confirmação de Entrega de Equipamentos | 2 | 21/02/2026 |
 
 ## 📜 Histórico Recente de Commits
 | Data | Autor | Mensagem |
 |:---|:---|:---|
+| 21/02 02:01 | **Rafael Cardoso** | feat: 🛡️ Implementa Quality Gate e padroniza BDDs atuais |
+| 20/02 21:14 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
 | 20/02 18:14 | **Rafael Cardoso** | Disparo de email 2 usuarios |
 | 20/02 21:01 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
 | 20/02 18:00 | **Rafael Cardoso** | Disparo de email formatado |
-| 20/02 20:51 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
-| 20/02 17:50 | **Rafael Cardoso** | Disparo de email dashboard |
 
 ## 🏷️ Cobertura de Tags
 | Tag | Usos |
 |---|---|
-| `@modulo_equipamentos` | 4 |
-| `@modulo_pagamento` | 3 |
-| `@modulo_equipamentos_old` | 3 |
-| `@modulo_equipamento` | 2 |
+| `@regressivo` | 5 |
+| `@smoke` | 4 |
+| `@prioridade_alta` | 3 |
+| `@negativo` | 2 |
+| `@modulo_monitoramento` | 1 |
+| `@envio_monitoramento_sucesso` | 1 |
+| `@conclusao_projeto` | 1 |
+| `@sucesso` | 1 |
+| `@modulo_simulacao` | 1 |
+| `@simulacao_sucesso` | 1 |
+| `@simulacao_limite_valor` | 1 |
+| `@modulo_notas_fiscais` | 1 |
+| `@envio_notas_sucesso` | 1 |
+| `@envio_notas_aguardando` | 1 |
+| `@status` | 1 |
+| `@modulo_analise_credito` | 1 |
+| `@pf` | 1 |
+| `@pj` | 1 |
+| `@validacao_cep` | 1 |
+| `@modulo_entrega` | 1 |
+| `@confirma_entrega_integrador` | 1 |
+| `@reenvio_notificacao_cliente` | 1 |
+| `@notificacao` | 1 |
