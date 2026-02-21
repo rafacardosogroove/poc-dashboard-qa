@@ -19,7 +19,7 @@ Funcionalidade: Solicitação de Análise de Crédito
     E clico em "Enviar para análise de crédito"
     Então o sistema deve processar a solicitação com sucesso
 
-  @pj @prioridade_alta
+ 
   Cenário: Enviar dados de Pessoa Jurídica para análise com sucesso
     Quando seleciono a opção de Pessoa Jurídica
     E preencho a Razão Social e o CNPJ
