@@ -1,12 +1,12 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 21/02/2026 05:03
+> 👤 **Último Push:** rafacardosogroove | 🕒 **Atualizado em:** 21/02/2026 05:29
 
 ## 🏆 Top QAs (Ranking de Commits)
 | QA | Total de Pushes (Commits) |
 |:---|:---:|
-| 👨‍💻 **Rafael Cardoso** | 25 |
-| 👨‍💻 **Robô da Qualidade (QA Bot)** | 21 |
-| 👨‍💻 **rafacardosogroove** | 3 |
+| 👨‍💻 **Rafael Cardoso** | 30 |
+| 👨‍💻 **Robô da Qualidade (QA Bot)** | 22 |
+| 👨‍💻 **rafacardosogroove** | 4 |
 
 ## 🚀 Status da Automação
 | Categoria | Total |
@@ -64,34 +64,32 @@
 ## 📜 Histórico Recente de Commits
 | Data | Autor | Mensagem |
 |:---|:---|:---|
-| 21/02 02:01 | **Rafael Cardoso** | feat: 🛡️ Implementa Quality Gate e padroniza BDDs atuais |
-| 20/02 21:14 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
-| 20/02 18:14 | **Rafael Cardoso** | Disparo de email 2 usuarios |
-| 20/02 21:01 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
-| 20/02 18:00 | **Rafael Cardoso** | Disparo de email formatado |
+| 21/02 02:28 | **rafacardosogroove** | Merge pull request #1 from rafacardosogroove/teste-falha-bdd |
+| 21/02 02:26 | **Rafael Cardoso** | Corrigindo valida bdd |
+| 21/02 02:22 | **Rafael Cardoso** | Arquivos corrigidos |
+| 21/02 02:17 | **Rafael Cardoso** | Outro arquivo fora do padrao |
+| 21/02 02:12 | **Rafael Cardoso** | test: forçando erro no BDD para testar o bloqueio |
 
 ## 🏷️ Cobertura de Tags
 | Tag | Usos |
 |---|---|
-| `@regressivo` | 5 |
+| `@regressivo` | 4 |
 | `@smoke` | 4 |
-| `@prioridade_alta` | 3 |
-| `@negativo` | 2 |
+| `@prioridade_alta` | 2 |
+| `@pf` | 2 |
 | `@modulo_monitoramento` | 1 |
 | `@envio_monitoramento_sucesso` | 1 |
 | `@conclusao_projeto` | 1 |
 | `@sucesso` | 1 |
-| `@modulo_simulacao` | 1 |
-| `@simulacao_sucesso` | 1 |
-| `@simulacao_limite_valor` | 1 |
+| `@outratag` | 1 |
+| `@testetag` | 1 |
 | `@modulo_notas_fiscais` | 1 |
 | `@envio_notas_sucesso` | 1 |
 | `@envio_notas_aguardando` | 1 |
 | `@status` | 1 |
 | `@modulo_analise_credito` | 1 |
-| `@pf` | 1 |
-| `@pj` | 1 |
 | `@validacao_cep` | 1 |
+| `@negativo` | 1 |
 | `@modulo_entrega` | 1 |
 | `@confirma_entrega_integrador` | 1 |
 | `@reenvio_notificacao_cliente` | 1 |
