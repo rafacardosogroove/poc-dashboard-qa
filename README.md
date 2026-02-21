@@ -1,14 +1,17 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 21/02/2026 05:47
+
+> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 21/02/2026 05:56
 
 ## 🏆 Top QAs (Ranking de Commits)
+
 | QA | Total de Pushes (Commits) |
 |:---|:---:|
-| 👨‍💻 **Rafael Cardoso** | 32 |
-| 👨‍💻 **Robô da Qualidade (QA Bot)** | 24 |
+| 👨‍💻 **Rafael Cardoso** | 33 |
+| 👨‍💻 **Robô da Qualidade (QA Bot)** | 25 |
 | 👨‍💻 **rafacardosogroove** | 4 |
 
 ## 🚀 Status da Automação
+
 | Categoria | Total |
 | :--- | :---: |
 | 📝 Cenários BDD | 11 |
@@ -16,6 +19,7 @@
 | 🧪 Scripts de Teste | 1 |
 
 ## 📂 Detalhamento de Negócio (Features)
+
 | Feature | Cenários | Autor Principal | Modificação |
 |:---|:---:|:---|:---:|
 | Monitoramento e Conclusão do Projeto | 2 | Rafael Cardoso | 21/02/2026 |
@@ -24,9 +28,11 @@
 | Solicitação de Análise de Crédito | 3 | Rafael Cardoso | 21/02/2026 |
 | Confirmação de Entrega de Equipamentos | 2 | Rafael Cardoso | 21/02/2026 |
 
-### 📂 Page Objects Criados
+### 📄 Page Objects Criados
+
 <details>
 <summary><b>Clique para ver a lista de 19 pages</b></summary>
+
 <ul>
 <li><code>Analise_processamento_page</code></li>
 <li><code>Verificacao_notas_fiscais_page</code></li>
@@ -51,23 +57,27 @@
 </details>
 
 ### 🧪 Scripts de Teste Automatizados
+
 <details>
 <summary><b>Clique para ver os 1 scripts de teste</b></summary>
+
 <ul>
 <li><code>simulacao credito</code></li>
 </ul>
 </details>
 
 ## 📜 Histórico Recente de Commits
+
 | Data | Autor | Mensagem |
 |:---|:---|:---|
+| 21/02 02:52 | **Rafael Cardoso** | Corrigindo tabelas emails |
+| 21/02 05:47 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
 | 21/02 02:47 | **Rafael Cardoso** | Dasboard duplo email e Readme |
 | 21/02 05:37 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
 | 21/02 02:36 | **Rafael Cardoso** | Ajustes disparo de email main |
-| 21/02 05:29 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
-| 21/02 02:28 | **rafacardosogroove** | Merge pull request #1 from rafacardosogroove/teste-falha-bdd |
 
 ## 🏷️ Cobertura de Tags
+
 | Tag | Usos |
 |---|---|
 | `@regressivo` | 4 |
