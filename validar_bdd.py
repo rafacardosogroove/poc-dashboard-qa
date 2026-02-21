@@ -30,16 +30,19 @@ def validar_bdd():
                     if not l_strip:
                         continue # Ignora linhas em branco para a lógica da tag funcionar
 
-                    # Regra 2: Cenário precisa de Tag na linha de cima
-                    if l_strip.startswith('Cenário:') or l_strip.startswith('Esquema do Cenário:'):
+                    # Regra 2: Cenário precisa de Tag na linha de cima (Agora blindado contra falta de acento)
+                    variacoes_cenario = ('Cenário:', 'Cenario:', 'Esquema do Cenário:', 'Esquema do Cenario:', 'Scenario:', 'Scenario Outline:')
+                    
+                    if l_strip.startswith(variacoes_cenario):
                         nome_cenario = l_strip
                         passos_cenario = 0 # Zera a contagem de passos para o novo cenário
                         
                         if not linha_anterior.startswith('@'):
                             erros.append(f"❌ [{file} | Linha {num_linha}] O cenário não possui uma Tag (@) na linha acima.")
 
-                    # Regra 3: Máximo de 8 passos
-                    elif l_strip.startswith(('Dado ', 'Quando ', 'Então ', 'E ', 'Mas ')):
+                    # Regra 3: Máximo de 8 passos (Blindado contra 'Entao' sem acento)
+                    variacoes_passos = ('Dado ', 'Quando ', 'Então ', 'Entao ', 'E ', 'Mas ')
+                    elif l_strip.startswith(variacoes_passos):
                         passos_cenario += 1
                         if passos_cenario > 8:
                             erros.append(f"❌ [{file} | Linha {num_linha}] O '{nome_cenario}' tem mais de 8 passos (Total atual: {passos_cenario}).")

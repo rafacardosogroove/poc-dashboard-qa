@@ -9,7 +9,7 @@ Funcionalidade: Simulação de Financiamento
 
   Contexto:
     Dado que estou na tela de Simulação de Financiamento
-
+@outratag
   Cenário: Realizar simulação com dados válidos
     Quando preencho CPF/CNPJ e a renda comprovada
     E preencho o valor do projeto e seleciono o distribuidor
@@ -17,7 +17,7 @@ Funcionalidade: Simulação de Financiamento
     E defino a data de vencimento da primeira parcela
     E clico no botão "Iniciar simulação"
     Então o sistema deve processar a simulação e avançar de etapa
-
+@testetag
   Cenário: Bloquear simulação com valor do projeto inválido
     Quando preencho os dados do cliente e da simulação
     Mas o valor do projeto não respeita a regra de 50% do valor do equipamento
