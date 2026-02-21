@@ -2,7 +2,6 @@
 # Data Criacao: 20/02/2026
 # Descrição: Validação da simulação de financiamento na criação do projeto
 
-@modulo_simulacao @regressivo
 Funcionalidade: Simulação de Financiamento
   Como um integrador logado
   Quero simular os valores do projeto
