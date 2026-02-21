@@ -37,10 +37,25 @@ def detalhar_arquivos(diretorio, extensao):
                     lista_arquivos.append(nome_limpo)
     return sorted(lista_arquivos)
 
+def extrair_autor_do_bdd(caminho_arquivo):
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+            for _ in range(15): # Procura nas primeiras 15 linhas
+                linha = f.readline()
+                if not linha:
+                    break
+                if "Autor:" in linha:
+                    return linha.split("Autor:")[1].strip()
+    except:
+        pass
+    return "Não identificado"
+
 def gerar_metricas_bdd(diretorio='features'):
-    total_features, total_cenarios = 0, 0
+    total_features = 0
+    total_cenarios = 0
     tags_contador = Counter()
     dados_features = []
+    
     if os.path.exists(diretorio):
         for root, _, files in os.walk(diretorio):
             for file in files:
@@ -48,22 +63,30 @@ def gerar_metricas_bdd(diretorio='features'):
                     caminho = os.path.join(root, file)
                     data_m = datetime.fromtimestamp(os.path.getmtime(caminho)).strftime('%d/%m/%Y')
                     total_features += 1
-                    cenarios_f, nome_f = 0, "Sem nome"
+                    cenarios_f = 0
+                    nome_f = file.replace('.feature', '')
+                    
+                    # Usa a função nova para pegar o autor direto do arquivo
+                    autor_f = extrair_autor_do_bdd(caminho)
+
                     with open(caminho, 'r', encoding='utf-8') as f:
                         for linha in f:
                             l = linha.strip()
                             for p in l.split():
-                                if p.startswith('@'): tags_contador[p] += 1
+                                if p.startswith('@'): 
+                                    tags_contador[p] += 1
                             if l.startswith(('Funcionalidade:', 'Feature:')):
                                 nome_f = l.split(':', 1)[1].strip()
-                            if l.startswith(('Cenário:', 'Cenario:', 'Scenario:')):
+                            # Agora aceita com e sem acento
+                            if l.startswith(('Cenário:', 'Cenario:', 'Esquema do Cenário:', 'Scenario:')):
                                 total_cenarios += 1
                                 cenarios_f += 1
-                    dados_features.append({'nome': nome_f, 'qtd': cenarios_f, 'data': data_m})
+                    
+                    dados_features.append({'nome': nome_f, 'qtd': cenarios_f, 'data': data_m, 'autor': autor_f})
     return total_features, total_cenarios, dados_features, tags_contador
 
 if __name__ == '__main__':
-    features, cenarios, lista_features, tags = gerar_metricas_bdd()
+    features_count, cenarios, lista_features, tags = gerar_metricas_bdd()
     pages_encontradas = detalhar_arquivos('pages', '.py')
     testes_encontrados = detalhar_arquivos('tests', '.py') 
     commits = get_git_commits()
@@ -80,42 +103,32 @@ if __name__ == '__main__':
         print(f"| 👨‍💻 **{qa}** | {qtd} |")
     
     print("\n## 🚀 Status da Automação")
-    print(f"| Categoria | Total |")
-    print(f"| :--- | :---: |")
+    print("| Categoria | Total |")
+    print("| :--- | :---: |")
     print(f"| 📝 Cenários BDD | {cenarios} |")
     print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
     print(f"| 🧪 Scripts de Teste | {len(testes_encontrados)} |")
     
-    # Seção de Page Objects (Sanfona)
-    print("\n### 📂 Page Objects Criados")
-    if pages_encontradas:
-        print("<details>")
-        print(f"<summary><b>Clique para ver a lista de {len(pages_encontradas)} pages</b></summary>\n")
-        print("<ul>")
-        for p in pages_encontradas:
-            print(f"<li><code>{p}</code></li>")
-        print("</ul>")
-        print("</details>")
+    print("\n## 📂 Detalhamento de Negócio (Features)")
+    print("| Feature | Cenários | Autor Principal | Modificação |")
+    print("|:---|:---:|:---|:---:|")
+    for f in lista_features:
+        print(f"| {f['nome']} | {f['qtd']} | {f['autor']} | {f['data']} |")
 
-    # NOVA Seção de Scripts de Teste (Sanfona Identica)
+    # Lista normal sem o details para não quebrar no E-mail
+    print("\n### 📄 Page Objects Criados")
+    if pages_encontradas:
+        for p in pages_encontradas:
+            print(f"- `{p}`")
+    else:
+        print("*Nenhuma page encontrada na pasta /pages*")
+
     print("\n### 🧪 Scripts de Teste Automatizados")
     if testes_encontrados:
-        print("<details>")
-        print(f"<summary><b>Clique para ver os {len(testes_encontrados)} scripts de teste</b></summary>\n")
-        print("<ul>")
         for t in testes_encontrados:
-            print(f"<li><code>{t}</code></li>")
-        print("</ul>")
-        print("</details>")
+            print(f"- `{t}`")
     else:
         print("*Nenhum script de teste encontrado na pasta /tests*")
-
-    print("\n---")
-    print("## 📂 Detalhamento de Negócio (Features)")
-    print("| Feature | Cenários | Modificação |")
-    print("|:---|:---:|:---:|")
-    for f in lista_features:
-        print(f"| {f['nome']} | {f['qtd']} | {f['data']} |")
         
     print("\n## 📜 Histórico Recente de Commits")
     print("| Data | Autor | Mensagem |")
