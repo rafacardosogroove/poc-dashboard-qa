@@ -40,7 +40,7 @@ def detalhar_arquivos(diretorio, extensao):
 def extrair_autor_do_bdd(caminho_arquivo):
     try:
         with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-            for _ in range(15): # Procura nas primeiras 15 linhas
+            for _ in range(15):
                 linha = f.readline()
                 if not linha:
                     break
@@ -51,8 +51,7 @@ def extrair_autor_do_bdd(caminho_arquivo):
     return "Não identificado"
 
 def gerar_metricas_bdd(diretorio='features'):
-    total_features = 0
-    total_cenarios = 0
+    total_features, total_cenarios = 0, 0
     tags_contador = Counter()
     dados_features = []
     
@@ -65,19 +64,15 @@ def gerar_metricas_bdd(diretorio='features'):
                     total_features += 1
                     cenarios_f = 0
                     nome_f = file.replace('.feature', '')
-                    
-                    # Usa a função nova para pegar o autor direto do arquivo
                     autor_f = extrair_autor_do_bdd(caminho)
 
                     with open(caminho, 'r', encoding='utf-8') as f:
                         for linha in f:
                             l = linha.strip()
                             for p in l.split():
-                                if p.startswith('@'): 
-                                    tags_contador[p] += 1
+                                if p.startswith('@'): tags_contador[p] += 1
                             if l.startswith(('Funcionalidade:', 'Feature:')):
                                 nome_f = l.split(':', 1)[1].strip()
-                            # Agora aceita com e sem acento
                             if l.startswith(('Cenário:', 'Cenario:', 'Esquema do Cenário:', 'Scenario:')):
                                 total_cenarios += 1
                                 cenarios_f += 1
@@ -85,61 +80,80 @@ def gerar_metricas_bdd(diretorio='features'):
                     dados_features.append({'nome': nome_f, 'qtd': cenarios_f, 'data': data_m, 'autor': autor_f})
     return total_features, total_cenarios, dados_features, tags_contador
 
-if __name__ == '__main__':
-    features_count, cenarios, lista_features, tags = gerar_metricas_bdd()
-    pages_encontradas = detalhar_arquivos('pages', '.py')
-    testes_encontrados = detalhar_arquivos('tests', '.py') 
+def montar_relatorio(para_email=False):
+    _, cenarios, lista_features, tags = gerar_metricas_bdd()
+    pages = detalhar_arquivos('pages', '.py')
+    testes = detalhar_arquivos('tests', '.py') 
     commits = get_git_commits()
     autor = get_last_committer()
     top_qas = get_top_contributors()
     
-    print("# 📊 Dashboard de Engenharia de Qualidade - SolAgora")
-    print(f"> 👤 **Último Push:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
+    linhas = []
+    linhas.append("# 📊 Dashboard de Engenharia de Qualidade - SolAgora")
+    linhas.append(f"> 👤 **Último Push:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
     
-    print("## 🏆 Top QAs (Ranking de Commits)")
-    print("| QA | Total de Pushes (Commits) |")
-    print("|:---|:---:|")
+    linhas.append("## 🏆 Top QAs (Ranking de Commits)")
+    linhas.append("| QA | Total de Pushes (Commits) |")
+    linhas.append("|:---|:---:|")
     for qa, qtd in top_qas:
-        print(f"| 👨‍💻 **{qa}** | {qtd} |")
+        linhas.append(f"| 👨‍💻 **{qa}** | {qtd} |")
     
-    print("\n## 🚀 Status da Automação")
-    print("| Categoria | Total |")
-    print("| :--- | :---: |")
-    print(f"| 📝 Cenários BDD | {cenarios} |")
-    print(f"| 📄 Page Objects | {len(pages_encontradas)} |")
-    print(f"| 🧪 Scripts de Teste | {len(testes_encontrados)} |")
+    linhas.append("\n## 🚀 Status da Automação")
+    linhas.append("| Categoria | Total |")
+    linhas.append("| :--- | :---: |")
+    linhas.append(f"| 📝 Cenários BDD | {cenarios} |")
+    linhas.append(f"| 📄 Page Objects | {len(pages)} |")
+    linhas.append(f"| 🧪 Scripts de Teste | {len(testes)} |")
     
-    print("\n## 📂 Detalhamento de Negócio (Features)")
-    print("| Feature | Cenários | Autor Principal | Modificação |")
-    print("|:---|:---:|:---|:---:|")
+    linhas.append("\n## 📂 Detalhamento de Negócio (Features)")
+    linhas.append("| Feature | Cenários | Autor Principal | Modificação |")
+    linhas.append("|:---|:---:|:---|:---:|")
     for f in lista_features:
-        print(f"| {f['nome']} | {f['qtd']} | {f['autor']} | {f['data']} |")
+        linhas.append(f"| {f['nome']} | {f['qtd']} | {f['autor']} | {f['data']} |")
 
-    # Lista normal sem o details para não quebrar no E-mail
-    print("\n### 📄 Page Objects Criados")
-    if pages_encontradas:
-        for p in pages_encontradas:
-            print(f"- `{p}`")
+    linhas.append("\n### 📂 Page Objects Criados")
+    if pages:
+        if para_email: # E-mail (Lista normal para não quebrar)
+            for p in pages: linhas.append(f"- `{p}`")
+        else:          # GitHub (Sanfona bonita)
+            linhas.append("<details>")
+            linhas.append(f"<summary><b>Clique para ver a lista de {len(pages)} pages</b></summary>\n<ul>")
+            for p in pages: linhas.append(f"<li><code>{p}</code></li>")
+            linhas.append("</ul>\n</details>")
     else:
-        print("*Nenhuma page encontrada na pasta /pages*")
+        linhas.append("*Nenhuma page encontrada na pasta /pages*")
 
-    print("\n### 🧪 Scripts de Teste Automatizados")
-    if testes_encontrados:
-        for t in testes_encontrados:
-            print(f"- `{t}`")
+    linhas.append("\n### 🧪 Scripts de Teste Automatizados")
+    if testes:
+        if para_email: # E-mail (Lista normal para não quebrar)
+            for t in testes: linhas.append(f"- `{t}`")
+        else:          # GitHub (Sanfona bonita)
+            linhas.append("<details>")
+            linhas.append(f"<summary><b>Clique para ver os {len(testes)} scripts de teste</b></summary>\n<ul>")
+            for t in testes: linhas.append(f"<li><code>{t}</code></li>")
+            linhas.append("</ul>\n</details>")
     else:
-        print("*Nenhum script de teste encontrado na pasta /tests*")
+        linhas.append("*Nenhum script de teste encontrado na pasta /tests*")
         
-    print("\n## 📜 Histórico Recente de Commits")
-    print("| Data | Autor | Mensagem |")
-    print("|:---|:---|:---|")
+    linhas.append("\n## 📜 Histórico Recente de Commits")
+    linhas.append("| Data | Autor | Mensagem |")
+    linhas.append("|:---|:---|:---|")
     for c in commits:
         cols = c.split(" | ")
-        if len(cols) == 3:
-            print(f"| {cols[0]} | **{cols[1]}** | {cols[2]} |")
+        if len(cols) == 3: linhas.append(f"| {cols[0]} | **{cols[1]}** | {cols[2]} |")
 
-    print("\n## 🏷️ Cobertura de Tags")
-    print("| Tag | Usos |")
-    print("|---|---|")
+    linhas.append("\n## 🏷️ Cobertura de Tags")
+    linhas.append("| Tag | Usos |")
+    linhas.append("|---|---|")
     for tag, qtd in tags.most_common():
-        print(f"| `{tag}` | {qtd} |")
+        linhas.append(f"| `{tag}` | {qtd} |")
+        
+    return "\n".join(linhas)
+
+if __name__ == '__main__':
+    # 1. Salva a versão limpa especificamente para o envio de e-mail
+    with open('email_dashboard.md', 'w', encoding='utf-8') as f:
+        f.write(montar_relatorio(para_email=True))
+        
+    # 2. Imprime a versão com Sanfona (vai alimentar o README.md no GitHub Actions)
+    print(montar_relatorio(para_email=False))

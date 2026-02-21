@@ -11,7 +11,7 @@ def enviar_relatorio():
     email_destinatario = "rcardoso1904@gmail.com,edson.oliveira@groove.tech"
     
     try:
-        with open('README.md', 'r', encoding='utf-8') as f:
+        with open('email_dashboard.md', 'r', encoding='utf-8') as f:
             conteudo_md = f.read()
 
         # CONVERSÃO: Transforma o texto do GitHub em HTML para o e-mail

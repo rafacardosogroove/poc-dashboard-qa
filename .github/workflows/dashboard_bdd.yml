@@ -24,6 +24,7 @@ jobs:
           python-version: '3.10'
 
       - name: 📊 Rodar o Script e Gerar Markdown
+        # AQUI FOI A CORREÇÃO: Volta para README.md! O Python cria o de e-mail sozinho.
         run: python gerar_dashboard.py > README.md
 
       - name: 💾 Fazer o Commit Automático
