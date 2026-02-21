@@ -1,11 +1,11 @@
 # 📊 Dashboard de Engenharia de Qualidade - SolAgora
-> 👤 **Último Push:** rafacardosogroove | 🕒 **Atualizado em:** 21/02/2026 05:29
+> 👤 **Último Push:** Rafael Cardoso | 🕒 **Atualizado em:** 21/02/2026 05:37
 
 ## 🏆 Top QAs (Ranking de Commits)
 | QA | Total de Pushes (Commits) |
 |:---|:---:|
-| 👨‍💻 **Rafael Cardoso** | 30 |
-| 👨‍💻 **Robô da Qualidade (QA Bot)** | 22 |
+| 👨‍💻 **Rafael Cardoso** | 31 |
+| 👨‍💻 **Robô da Qualidade (QA Bot)** | 23 |
 | 👨‍💻 **rafacardosogroove** | 4 |
 
 ## 🚀 Status da Automação
@@ -15,60 +15,47 @@
 | 📄 Page Objects | 19 |
 | 🧪 Scripts de Teste | 1 |
 
-### 📂 Page Objects Criados
-<details>
-<summary><b>Clique para ver a lista de 19 pages</b></summary>
+## 📂 Detalhamento de Negócio (Features)
+| Feature | Cenários | Autor Principal | Modificação |
+|:---|:---:|:---|:---:|
+| Monitoramento e Conclusão do Projeto | 2 | Rafael Cardoso | 21/02/2026 |
+| Simulação de Financiamento | 2 | Rafael Cardoso | 21/02/2026 |
+| Envio de Notas Fiscais | 2 | Rafael Cardoso | 21/02/2026 |
+| Solicitação de Análise de Crédito | 3 | Rafael Cardoso | 21/02/2026 |
+| Confirmação de Entrega de Equipamentos | 2 | Rafael Cardoso | 21/02/2026 |
 
-<ul>
-<li><code>Analise_processamento_page</code></li>
-<li><code>Verificacao_notas_fiscais_page</code></li>
-<li><code>analise_credito_page</code></li>
-<li><code>conferir_documentacao</code></li>
-<li><code>documentacao_completa_page</code></li>
-<li><code>documentacao_e_comprovantes_page</code></li>
-<li><code>documentacao_pj</code></li>
-<li><code>documentacao_popup_page</code></li>
-<li><code>login_page</code></li>
-<li><code>modal_conta_energia_page</code></li>
-<li><code>modal_notas_fiscais_page</code></li>
-<li><code>modal_pagamento_page</code></li>
-<li><code>notas_fiscais_page</code></li>
-<li><code>opcoes_parcelamento_page</code></li>
-<li><code>pagamento_processo_iniciado_page</code></li>
-<li><code>politica_renda_page</code></li>
-<li><code>resultado_simulacao_page</code></li>
-<li><code>simulador_page</code></li>
-<li><code>validacao_valoresv_page</code></li>
-</ul>
-</details>
+### 📄 Page Objects Criados
+- `Analise_processamento_page`
+- `Verificacao_notas_fiscais_page`
+- `analise_credito_page`
+- `conferir_documentacao`
+- `documentacao_completa_page`
+- `documentacao_e_comprovantes_page`
+- `documentacao_pj`
+- `documentacao_popup_page`
+- `login_page`
+- `modal_conta_energia_page`
+- `modal_notas_fiscais_page`
+- `modal_pagamento_page`
+- `notas_fiscais_page`
+- `opcoes_parcelamento_page`
+- `pagamento_processo_iniciado_page`
+- `politica_renda_page`
+- `resultado_simulacao_page`
+- `simulador_page`
+- `validacao_valoresv_page`
 
 ### 🧪 Scripts de Teste Automatizados
-<details>
-<summary><b>Clique para ver os 1 scripts de teste</b></summary>
-
-<ul>
-<li><code>simulacao credito</code></li>
-</ul>
-</details>
-
----
-## 📂 Detalhamento de Negócio (Features)
-| Feature | Cenários | Modificação |
-|:---|:---:|:---:|
-| Monitoramento e Conclusão do Projeto | 2 | 21/02/2026 |
-| Simulação de Financiamento | 2 | 21/02/2026 |
-| Envio de Notas Fiscais | 2 | 21/02/2026 |
-| Solicitação de Análise de Crédito | 3 | 21/02/2026 |
-| Confirmação de Entrega de Equipamentos | 2 | 21/02/2026 |
+- `simulacao credito`
 
 ## 📜 Histórico Recente de Commits
 | Data | Autor | Mensagem |
 |:---|:---|:---|
+| 21/02 02:36 | **Rafael Cardoso** | Ajustes disparo de email main |
+| 21/02 05:29 | **Robô da Qualidade (QA Bot)** | docs: 📊 Atualiza dashboard automático |
 | 21/02 02:28 | **rafacardosogroove** | Merge pull request #1 from rafacardosogroove/teste-falha-bdd |
 | 21/02 02:26 | **Rafael Cardoso** | Corrigindo valida bdd |
 | 21/02 02:22 | **Rafael Cardoso** | Arquivos corrigidos |
-| 21/02 02:17 | **Rafael Cardoso** | Outro arquivo fora do padrao |
-| 21/02 02:12 | **Rafael Cardoso** | test: forçando erro no BDD para testar o bloqueio |
 
 ## 🏷️ Cobertura de Tags
 | Tag | Usos |
