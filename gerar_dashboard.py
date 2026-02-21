@@ -89,16 +89,18 @@ def montar_relatorio(para_email=False):
     top_qas = get_top_contributors()
     
     linhas = []
-    linhas.append("# 📊 Dashboard de Engenharia de Qualidade - SolAgora")
+    linhas.append("# 📊 Dashboard de Engenharia de Qualidade - SolAgora\n")
     linhas.append(f"> 👤 **Último Push:** {autor} | 🕒 **Atualizado em:** {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
     
     linhas.append("## 🏆 Top QAs (Ranking de Commits)")
+    linhas.append("") # <--- Linha em branco obrigatória para o e-mail não quebrar a tabela
     linhas.append("| QA | Total de Pushes (Commits) |")
     linhas.append("|:---|:---:|")
     for qa, qtd in top_qas:
         linhas.append(f"| 👨‍💻 **{qa}** | {qtd} |")
     
     linhas.append("\n## 🚀 Status da Automação")
+    linhas.append("") # <--- Linha em branco
     linhas.append("| Categoria | Total |")
     linhas.append("| :--- | :---: |")
     linhas.append(f"| 📝 Cenários BDD | {cenarios} |")
@@ -106,36 +108,40 @@ def montar_relatorio(para_email=False):
     linhas.append(f"| 🧪 Scripts de Teste | {len(testes)} |")
     
     linhas.append("\n## 📂 Detalhamento de Negócio (Features)")
+    linhas.append("") # <--- Linha em branco
     linhas.append("| Feature | Cenários | Autor Principal | Modificação |")
     linhas.append("|:---|:---:|:---|:---:|")
     for f in lista_features:
         linhas.append(f"| {f['nome']} | {f['qtd']} | {f['autor']} | {f['data']} |")
 
-    linhas.append("\n### 📂 Page Objects Criados")
+    linhas.append("\n### 📄 Page Objects Criados")
+    linhas.append("") # <--- Linha em branco
     if pages:
-        if para_email: # E-mail (Lista normal para não quebrar)
+        if para_email: 
             for p in pages: linhas.append(f"- `{p}`")
-        else:          # GitHub (Sanfona bonita)
+        else:          
             linhas.append("<details>")
-            linhas.append(f"<summary><b>Clique para ver a lista de {len(pages)} pages</b></summary>\n<ul>")
+            linhas.append(f"<summary><b>Clique para ver a lista de {len(pages)} pages</b></summary>\n\n<ul>")
             for p in pages: linhas.append(f"<li><code>{p}</code></li>")
             linhas.append("</ul>\n</details>")
     else:
         linhas.append("*Nenhuma page encontrada na pasta /pages*")
 
     linhas.append("\n### 🧪 Scripts de Teste Automatizados")
+    linhas.append("") # <--- Linha em branco
     if testes:
-        if para_email: # E-mail (Lista normal para não quebrar)
+        if para_email: 
             for t in testes: linhas.append(f"- `{t}`")
-        else:          # GitHub (Sanfona bonita)
+        else:          
             linhas.append("<details>")
-            linhas.append(f"<summary><b>Clique para ver os {len(testes)} scripts de teste</b></summary>\n<ul>")
+            linhas.append(f"<summary><b>Clique para ver os {len(testes)} scripts de teste</b></summary>\n\n<ul>")
             for t in testes: linhas.append(f"<li><code>{t}</code></li>")
             linhas.append("</ul>\n</details>")
     else:
         linhas.append("*Nenhum script de teste encontrado na pasta /tests*")
         
     linhas.append("\n## 📜 Histórico Recente de Commits")
+    linhas.append("") # <--- Linha em branco
     linhas.append("| Data | Autor | Mensagem |")
     linhas.append("|:---|:---|:---|")
     for c in commits:
@@ -143,6 +149,7 @@ def montar_relatorio(para_email=False):
         if len(cols) == 3: linhas.append(f"| {cols[0]} | **{cols[1]}** | {cols[2]} |")
 
     linhas.append("\n## 🏷️ Cobertura de Tags")
+    linhas.append("") # <--- Linha em branco
     linhas.append("| Tag | Usos |")
     linhas.append("|---|---|")
     for tag, qtd in tags.most_common():
