@@ -1,26 +1,36 @@
-@modulo_pagamento
-Funcionalidade: Retirada de equipamento
-  
-  Cenário: Analise de credito 1
-    Dado que escolho Pix
-    Então vejo o QR Code
+# Autor: Rafael Cardoso
+# Data Criacao: 20/02/2026
+# Descrição: Validação dos formulários de análise de crédito para PF e PJ
 
-  Cenário: Pagamento via Boleto
-    Dado que escolho Boleto
-    Então o código de barras é gerado
+@modulo_analise_credito @regressivo
+Funcionalidade: Solicitação de Análise de Crédito
+  Como um parceiro integrador da SolAgora
+  Quero enviar os dados do meu cliente
+  Para verificar se ele tem crédito aprovado para o projeto solar
 
+  Contexto:
+    Dado que inicio um novo projeto na plataforma SolAgora
 
-    Cenário: Analise de credito 2
-    Dado que escolho Cartão
-    Então a compra é processada
+  @pf @smoke
+  Cenário: Enviar dados de Pessoa Física para análise com sucesso
+    Quando preencho as informações pessoais com nome e CPF válidos
+    E informo os dados de contato do cliente
+    E preencho o endereço de instalação com um CEP válido
+    E clico em "Enviar para análise de crédito"
+    Então o sistema deve processar a solicitação com sucesso
 
-@modulo_equipamentos
- Cenário: Analise de credito 3
-    Dado que escolho Cartão
-    Então a compra é processada
+  @pj @prioridade_alta
+  Cenário: Enviar dados de Pessoa Jurídica para análise com sucesso
+    Quando seleciono a opção de Pessoa Jurídica
+    E preencho a Razão Social e o CNPJ
+    E informo os dados de contato do sócio representante legal
+    E preencho o endereço de instalação
+    E clico em "Enviar para análise de crédito"
+    Então a solicitação da empresa deve ser enviada para processamento
 
-@modulo_equipamentos_old
- Cenário: Analise de credito 4
-    Dado que escolho Cartão
-    Então a compra é processada
-
+  @validacao_cep @negativo
+  Cenário: Tentar avançar com CEP de instalação inválido
+    Quando preencho os dados iniciais do cliente
+    Mas informo um CEP inexistente no endereço de instalação
+    E tento enviar para análise de crédito
+    Então o sistema
